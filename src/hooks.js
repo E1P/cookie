@@ -1,13 +1,22 @@
 import * as cookie from 'cookie';
+import { verify } from 'jsonwebtoken';
 
 export async function handle({ event, resolve }) {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
-	console.log('Cookies: ', cookies);
-	const response = await resolve(event);
+	const jwt = cookies.jwt ? verify(cookies.jwt, 'jwtPrivateKey') : null;
+	event.locals.user = jwt ? jwt : null;
 
-	return response;
+	return await resolve(event);
 }
 
-export function getSession() {
-	return { user: { firstName: 'Ewan' } };
+export function getSession({ locals }) {
+	return locals.user
+		? {
+				user: {
+					_id: locals.user._id,
+					email: locals.user.email,
+					password: locals.user.password
+				}
+		  }
+		: {};
 }

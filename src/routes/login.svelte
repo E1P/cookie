@@ -11,10 +11,24 @@
 </script>
 
 <script>
+	import { goto } from '$app/navigation';
+	import { session } from '$app/stores';
 	let email;
 	let password;
-	function onSubmit() {
+	async function onSubmit() {
 		console.log('Submitting...');
+		const response = await fetch('auth/login', {
+			method: 'POST',
+			body: JSON.stringify({
+				email,
+				password
+			})
+		});
+		const user = await response.json();
+		if (user) {
+			$session.user = user;
+			goto('/');
+		}
 	}
 </script>
 
