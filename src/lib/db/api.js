@@ -1,15 +1,14 @@
-// /auth/login
-import { getHost } from '$lib/db/api';
 import { sign } from 'jsonwebtoken';
 import { serialize } from 'cookie';
 
-export async function post({ request }) {
-	const json = await request.json();
-	const host = getHost();
-	console.log('Host: ', host);
-	// return createResponse('user/auth', json);
+export function getHost() {
+	return import.meta.env.DEV
+		? 'http://localhost:4000'
+		: 'https://auction-audio-server.herokuapp.com';
+}
 
-	const response = await fetch(`${host}/user/auth`, {
+export async function createResponse(urlSuffix, json) {
+	const response = await fetch(`${urlSuffix}`, {
 		method: 'POST',
 		body: JSON.stringify(json),
 		headers: { 'Content-Type': 'application/json' }
