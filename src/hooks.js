@@ -1,9 +1,9 @@
 import * as cookie from 'cookie';
-import { verify } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 
 export async function handle({ event, resolve }) {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
-	const jwt = cookies.jwt ? verify(cookies.jwt, 'jwtPrivateKey') : null;
+	const jwt = cookies.jwt ? jsonwebtoken.verify(cookies.jwt, 'jwtPrivateKey') : null;
 	event.locals.user = jwt;
 
 	return await resolve(event);

@@ -1,6 +1,6 @@
 // /auth/register
 
-import { sign } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import { serialize } from 'cookie';
 
 export async function post({ request }) {
@@ -17,7 +17,7 @@ export async function post({ request }) {
 		};
 	}
 
-	const jwt = sign(user, 'jwtPrivateKey');
+	const jwt = jsonwebtoken.sign(user, 'jwtPrivateKey');
 	const cookie = serialize('jwt', jwt, {
 		httpOnly: true,
 		path: '/',

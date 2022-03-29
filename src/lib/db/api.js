@@ -1,4 +1,4 @@
-import { sign } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import { serialize } from 'cookie';
 
 export function getHost() {
@@ -20,7 +20,7 @@ export async function createResponse(urlSuffix, json) {
 		};
 	}
 
-	const jwt = sign(user, 'jwtPrivateKey');
+	const jwt = jsonwebtoken.sign(user, 'jwtPrivateKey');
 	const cookie = serialize('jwt', jwt, {
 		httpOnly: true,
 		path: '/',
