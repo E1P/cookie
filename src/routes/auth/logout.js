@@ -1,10 +1,6 @@
 import { serialize } from 'cookie';
 
-export async function del() {
-	const response = await fetch('http://localhost:4000/user', { method: 'DELETE' });
-	const body = await response.json();
-	console.log('Deleting users...', body);
-
+export async function post() {
 	const cookie = serialize('jwt', 'deleted', {
 		httpOnly: true,
 		path: '/',
@@ -17,6 +13,8 @@ export async function del() {
 		headers: {
 			'set-cookie': cookie
 		},
-		body
+		body: {
+			ok: true
+		}
 	};
 }

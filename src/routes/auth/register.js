@@ -1,11 +1,11 @@
-// /auth/login
+// /auth/register
 
 import { sign } from 'jsonwebtoken';
 import { serialize } from 'cookie';
 
 export async function post({ request }) {
 	const json = await request.json();
-	const response = await fetch('http://localhost:4000/user/auth', {
+	const response = await fetch('http://localhost:4000/user', {
 		method: 'POST',
 		body: JSON.stringify(json),
 		headers: { 'Content-Type': 'application/json' }
