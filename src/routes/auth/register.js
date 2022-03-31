@@ -1,11 +1,12 @@
 // /auth/register
-
+import { getHost } from '$lib/db/api';
 import jsonwebtoken from 'jsonwebtoken';
 import { serialize } from 'cookie';
 
 export async function post({ request }) {
 	const json = await request.json();
-	const response = await fetch('http://localhost:4000/user', {
+	const host = getHost();
+	const response = await fetch(`${host}/user`, {
 		method: 'POST',
 		body: JSON.stringify(json),
 		headers: { 'Content-Type': 'application/json' }

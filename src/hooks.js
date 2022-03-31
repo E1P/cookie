@@ -2,6 +2,7 @@ import * as cookie from 'cookie';
 import jsonwebtoken from 'jsonwebtoken';
 
 export async function handle({ event, resolve }) {
+	console.log('Running handle...', event.url.href);
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 	const jwt = cookies.jwt ? jsonwebtoken.verify(cookies.jwt, 'jwtPrivateKey') : null;
 	event.locals.user = jwt;
@@ -10,9 +11,7 @@ export async function handle({ event, resolve }) {
 }
 
 export function getSession({ locals }) {
-	// console.log('Base Url: ', import.meta.env.BASE_URL);
-	// console.log('Mode: ', import.meta.env.MODE);
-	// console.log('JWT Key: ', import.meta.env.VITE_JWT_PRIVATE_KEY);
+	console.log('Running getSession...', locals.user?.firstName);
 	let session = {};
 	if (locals.user) {
 		const { _id, firstName, lastName, email, password } = locals.user;
