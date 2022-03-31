@@ -2,6 +2,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import { serialize } from 'cookie';
 
 export function getHost() {
+	console.log('Current mode: ', import.meta.env.MODE, import.meta.env.DEV);
 	return import.meta.env.DEV
 		? 'http://localhost:4000'
 		: 'https://auction-audio-server.herokuapp.com';
