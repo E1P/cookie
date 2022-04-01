@@ -14,7 +14,7 @@ export async function createResponse(urlSuffix, json) {
 		};
 	}
 
-	const jwt = jsonwebtoken.sign(user, 'jwtPrivateKey');
+	const jwt = jsonwebtoken.sign(user, process.env.AUDIO_AUCTION_JWT_KEY);
 	const cookie = serialize('jwt', jwt, {
 		httpOnly: true,
 		path: '/',
