@@ -1,7 +1,5 @@
 <script>
 	import { session } from '$app/stores';
-	export let jwtKey, databaseUrl;
-	console.log('process.env: ', jwtKey, databaseUrl);
 
 	async function logOut() {
 		await fetch('auth/logout', { method: 'POST' });
