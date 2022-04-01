@@ -1,13 +1,6 @@
 <script>
 	import { session } from '$app/stores';
 
-	async function onDelete() {
-		await fetch('auth/delete', {
-			method: 'DELETE'
-		});
-		$session.user = null;
-	}
-
 	async function logOut() {
 		await fetch('auth/logout', { method: 'POST' });
 		$session.user = null;
@@ -23,7 +16,6 @@
 {#if loggedIn}
 	<a href="/profile">{$session.user.firstName}'s User Profile</a>
 	<button on:click|preventDefault={logOut}>Log Out</button>
-	<button on:click|preventDefault={onDelete}>Delete Users & Cookies</button>
 {:else}
 	<a href="/login">Log In</a>{' '}<a href="/register">Register</a>
 {/if}

@@ -1,13 +1,12 @@
 // /auth/login
-import { getHost } from '$lib/db/api';
+import 'dotenv/config';
 import jsonwebtoken from 'jsonwebtoken';
 import { serialize } from 'cookie';
 
 export async function post({ request }) {
 	const json = await request.json();
-	const host = getHost();
-	console.log('Host: ', host);
-	// return createResponse('user/auth', json);
+	const host = process.env.DATABASE_URL;
+	const jwtKey = process.env.AUDIO_AUCTION_JWT_KEY;
 
 	const response = await fetch(`${host}/user/auth`, {
 		method: 'POST',
@@ -21,7 +20,7 @@ export async function post({ request }) {
 		};
 	}
 
-	const jwt = jsonwebtoken.sign(user, 'jwtPrivateKey');
+	const jwt = jsonwebtoken.sign(user, jwtKey);
 	const cookie = serialize('jwt', jwt, {
 		httpOnly: true,
 		path: '/',
