@@ -15,13 +15,15 @@
 	main {
 		font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
 		border: 2px solid darkorange;
-		padding: 10px;
+		border-radius: 1em;
+		margin: 1em;
+		padding: 1em;
 	}
 
 	.navbar {
 		padding: 0;
 		width: 100%;
-		height: 2vh;
+		height: 1em;
 		background-color: darkorange;
 	}
 </style>

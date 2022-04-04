@@ -14,8 +14,10 @@
 </svelte:head>
 
 {#if loggedIn}
-	<a href="/profile">{$session.user.firstName}'s User Profile</a>
-	<button on:click|preventDefault={logOut}>Log Out</button>
+	<div class="linkbox">
+		<a href="/profile">{$session.user.firstName}'s User Profile</a>
+		<button on:click|preventDefault={logOut}>Log Out</button>
+	</div>
 {:else}
 	<a href="/login">Log In</a>{' '}<a href="/register">Register</a>
 {/if}
@@ -25,3 +27,10 @@
 {:else}
 	<h3>Not logged in</h3>
 {/if}
+
+<style>
+	.linkbox {
+		display: flex;
+		justify-content: space-between;
+	}
+</style>
