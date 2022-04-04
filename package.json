@@ -22,6 +22,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@fontsource/roboto-condensed": "^4.5.6",
     "cookie": "^0.4.2",
     "dotenv": "^16.0.0",
     "jsonwebtoken": "^8.5.1"

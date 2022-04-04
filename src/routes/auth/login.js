@@ -24,7 +24,7 @@ export async function post({ request }) {
 	const cookie = serialize('jwt', jwt, {
 		httpOnly: true,
 		path: '/',
-		sameSite: true,
+		sameSite: 'strict',
 		maxAge: 60 * 60 * 24 * 7,
 		secure: true
 	});
